@@ -25,6 +25,12 @@ module.exports = {
     localhost: {
       url: "http://127.0.0.1:8545/",
       chainId: 31337,
+      // chainId: 11155111,
+    },
+  },
+  namedAccounts: {
+    deployer: {
+      default: 0, // here this will by default take the first account as deployer
     },
   },
 };
