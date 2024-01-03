@@ -9,7 +9,7 @@ import "./PriceConverter.sol";
 error FundMe__NotOwner();
 
 /**@title A sample Funding Contract
- * @author Patrick Collins
+ * @author Dagah Wilson Dachomo
  * @notice This contract is for creating a sample funding contract
  * @dev This implements price feeds as our library
  */
@@ -38,6 +38,9 @@ contract FundMe {
         i_owner = msg.sender;
     }
 
+    // function priceFeeds() public view returns (AggregatorV3Interface) {
+    //     return s_priceFeed;
+    // }
     /// @notice Funds our contract based on the ETH/USD price
     function fund() public payable {
         require(
