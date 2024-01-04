@@ -38,9 +38,7 @@ contract FundMe {
         i_owner = msg.sender;
     }
 
-    // function priceFeeds() public view returns (AggregatorV3Interface) {
-    //     return s_priceFeed;
-    // }
+
     /// @notice Funds our contract based on the ETH/USD price
     function fund() public payable {
         require(
