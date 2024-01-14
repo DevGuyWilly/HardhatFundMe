@@ -4,7 +4,7 @@ const { deployments, ethers, getNamedAccounts } = require("hardhat");
 describe("FundMe", async function () {
   let fundMe;
   let mockV3Aggregator;
-  //   const sendVaue = ethers.utils.parseEther("1");
+  const sendValue = ethers.parseEther("1");
   //
   // deploy FundMe Contract using hardhat deploy
   beforeEach(async function () {
@@ -12,6 +12,7 @@ describe("FundMe", async function () {
     const deploymentResult = await deployments.fixture(["all"]);
     //
     const fundMeAddress = deploymentResult["FundMe"]?.address;
+    deployer = fundMeAddress;
     fundMe = await ethers.getContractAt("FundMe", fundMeAddress);
 
     //
@@ -36,10 +37,12 @@ describe("FundMe", async function () {
     it("fails if you dont send enough ETH", async function () {
       expect(fundMe.fund({ value: 0 })).to.be.revertedWith("not enough funds");
     });
-    // it("updates the amount Data structures", async function () {
-    //   await fundMe.fund({ value: sendVaue });
-    //   const response = await fundMe.getAddressToAmountFunded()
-    // });
+    it("updated the amount funded data structure", async function () {
+      await fundMe.fund({ value: sendValue });
+      const [deployer] = await ethers.getSigners();
+      const response = await fundMe.getAddressToAmountFunded(deployer.address);
+      assert.equal(response.toString(), sendValue.toString());
+    });
   });
   //   beforeEach();
 });
